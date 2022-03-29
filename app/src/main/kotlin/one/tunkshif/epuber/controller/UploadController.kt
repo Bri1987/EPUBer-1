@@ -1,5 +1,6 @@
 package one.tunkshif.epuber.controller
 
+import one.tunkshif.epuber.data.ResponseResult
 import one.tunkshif.epuber.service.ConvertService
 import one.tunkshif.epuber.service.ConvertTask
 import one.tunkshif.epuber.service.SessionService
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 
 @RestController
+@RequestMapping("/api")
 class UploadController(
     @Autowired
     private val storeService: StoreService,
@@ -20,21 +22,20 @@ class UploadController(
     @Autowired
     private val sessionService: SessionService
 ) {
-    @PostMapping("/upload")
+    @PostMapping("/upload", produces = ["application/json"])
     @CrossOrigin(origins = ["*"])
     fun upload(
         @RequestParam("sessionId") sessionId: String,
-        @RequestParam("file") uploadFiles: List<MultipartFile>
-    ): List<String> {
-        val fileIds = uploadFiles.map {
+        @RequestParam("files") uploadFiles: List<MultipartFile>
+    ): ResponseResult<Map<String, String>> {
+        val fileIds = uploadFiles.associate {
             val fileId = storeService.store(it)
             convertService.submit(ConvertTask(sessionId, fileId) {
                 sessionService.find(sessionId)?.notify(fileId)
             })
-            fileId
+            fileId to it.name
         }
-        // TODO
-        return fileIds
+        return ResponseResult.ok(fileIds)
     }
 
     @GetMapping("/download/{fileId}")
