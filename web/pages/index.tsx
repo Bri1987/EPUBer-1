@@ -39,7 +39,7 @@ const Home: NextPage = () => {
 
       setFiles((files) => files.map((file) => ({ ...file, status: "upload" })))
 
-      fetch("http://epuber.tunkshif.one:8080/api/upload", {
+      fetch("https://epuber.tunkshif.one/api/upload", {
         method: "POST",
         body: formData
       })
