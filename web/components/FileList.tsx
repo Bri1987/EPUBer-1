@@ -42,7 +42,7 @@ const Status = ({
             <DownloadIcon className="h-6 w-6 text-gray-600" />
           </span>
           <span className="font-bold text-gray-600">
-            <a href={`http://epuber.tunkshif.one/api/download/${id}`}>
+            <a href={`https://epuber.tunkshif.one/api/download/${id}`}>
               Download
             </a>
           </span>
