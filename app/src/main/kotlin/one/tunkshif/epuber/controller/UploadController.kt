@@ -31,9 +31,9 @@ class UploadController(
         val fileIds = uploadFiles.associate {
             val fileId = storeService.store(it)
             convertService.submit(ConvertTask(sessionId, fileId) {
-                sessionService.find(sessionId)?.notify(fileId)
+                sessionService.notify(sessionId, fileId)
             })
-            fileId to it.name
+            fileId to it.resource.filename!!
         }
         return ResponseResult.ok(fileIds)
     }

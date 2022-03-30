@@ -16,7 +16,7 @@ class SessionService {
     // TODO: Error Handling
     fun find(sessionId: String) = sessions[sessionId]
 
-    // TODO: To be implemented
+    // TODO: To be fully implemented
     fun notify(sessionId: String, fileId: String) = sessions[sessionId]?.notify(fileId)
 
     fun destroy(sessionId: String) {
