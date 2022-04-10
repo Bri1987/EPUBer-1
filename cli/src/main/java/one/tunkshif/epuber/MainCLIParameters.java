@@ -7,17 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Parameters(separators = "=") //space works too
-public class MainCLIParameters
-{
+public class MainCLIParameters {
     @Parameter(names = {"-h", "--help"}, help = true,
             description = "Displays help information")
     private boolean help;
 
     @Parameter(
-               variableArity = true,
-               required = true,
-               validateWith = FilesParameterValidator.class,
-               description = "path(s) to file(s) which you want to convert")
+            variableArity = true,
+            required = true,
+            validateWith = FilesParameterValidator.class,
+            description = "path(s) to file(s) which you want to convert")
     private List<String> profileFiles = new ArrayList<>();
 
     @Parameter(names = {"--output"},
@@ -33,8 +32,7 @@ public class MainCLIParameters
         return profileFiles;
     }
 
-    public boolean isHelp()
-    {
+    public boolean isHelp() {
         return help;
     }
 }

@@ -13,6 +13,7 @@ repositories {
 dependencies {
     implementation("nl.siegmann.epublib:epublib-core:3.1")
     implementation("org.apache.pdfbox:pdfbox:2.0.25")
+    implementation("com.levigo.jbig2:levigo-jbig2-imageio:2.0")
 
     implementation(kotlin("stdlib"))
 }
